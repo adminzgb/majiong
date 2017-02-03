@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gbin.dao.BeGangMapper" >
+  <resultMap id="BaseResultMap" type="com.gbin.model.BeGang" >
+    <result column="fang_gang_id" property="fangGangId" jdbcType="VARCHAR" />
+    <result column="be_fang_gang_id" property="beFangGangId" jdbcType="VARCHAR" />
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="round_id" property="roundId" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.gbin.model.BeGang" >
+    insert into be_gang (fang_gang_id, be_fang_gang_id, round_id,id, 
+      create_time, update_time)
+    values (#{fangGangId,jdbcType=VARCHAR}, #{beFangGangId,jdbcType=VARCHAR},{roundId,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gbin.model.BeGang" >
+    insert into be_gang
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="fangGangId != null" >
+        fang_gang_id,
+      </if>
+      <if test="beFangGangId != null" >
+        be_fang_gang_id,
+      </if>
+       <if test="roundId != null" >
+       round_id,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="fangGangId != null" >
+        #{fangGangId,jdbcType=VARCHAR},
+      </if>
+      <if test="beFangGangId != null" >
+        #{beFangGangId,jdbcType=VARCHAR},
+      </if>
+       <if test="roundId != null" >
+        #{roundId,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.gbin.dao.SettingMapper" >
+  <resultMap id="BaseResultMap" type="com.gbin.model.Setting" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="hu" property="hu" jdbcType="INTEGER" />
+    <result column="an" property="an" jdbcType="INTEGER" />
+    <result column="ming" property="ming" jdbcType="INTEGER" />
+    <result column="fang" property="fang" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.gbin.model.Setting" >
+    insert into setting (id, hu, an, ming, 
+      fang)
+    values (#{id,jdbcType=VARCHAR}, #{hu,jdbcType=INTEGER}, #{an,jdbcType=INTEGER}, #{ming,jdbcType=INTEGER}, 
+      #{fang,jdbcType=INTEGER}, #{update_time,jdbcType=TIMESTAMP}, #{create_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.gbin.model.Setting" >
+    insert into setting
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="hu != null" >
+        hu,
+      </if>
+      <if test="an != null" >
+        an,
+      </if>
+      <if test="ming != null" >
+        ming,
+      </if>
+      <if test="fang != null" >
+        fang,
+      </if>
+       <if test="createTime != null" >
+        create_time,
+      </if>
+       <if test="updateTime != null" >
+        update_time
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="hu != null" >
+        #{hu,jdbcType=INTEGER},
+      </if>
+      <if test="an != null" >
+        #{an,jdbcType=INTEGER},
+      </if>
+      <if test="ming != null" >
+        #{ming,jdbcType=INTEGER},
+      </if>
+      <if test="fang != null" >
+        #{fang,jdbcType=INTEGER},
+      </if>
+       <if test="createTime != null" >
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+       <if test="updateTime != null" >
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <sql id="Base_Column_List" >
+    id, create_time, update_time,hu,an,ming,fang
+  </sql>
+  <select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from setting
+  </select>
+    <update id="updateByPrimaryKeySelective" parameterType="com.gbin.model.Setting" >
+    update setting
+    <set >
+      <if test="hu != null" >
+        hu = #{hu,jdbcType=INTEGER},
+      </if>
+      <if test="an != null" >
+        an = #{an,jdbcType=INTEGER},
+      </if>
+       <if test="ming != null" >
+        ming = #{ming,jdbcType=INTEGER},
+      </if>
+      <if test="fang != null" >
+        fang = #{fang,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.gbin.model.Setting" >
+    update attend_people
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      ming=#{ming,jdbcType=INTEGER},
+      fang=#{fang,jdbcType=INTEGER},
+      an=#{an,jdbcType=INTEGER},
+      hu=#{hu,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>
